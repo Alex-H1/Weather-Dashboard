@@ -15,7 +15,8 @@ var windSpeedEl = $('#windSpeed');
 var uviEl = $('#uvi');
 var dayTwoEl = $('.dayTwo');
 var dayThreeEl =$('.dayThree');
-var dayFourEl =$('.dayFive');
+var dayFourEl =$('.dayFour');
+var dayFiveEl =$('.dayFive')
 var daySixEl =$('.daySix');
 var searchLog = [];
 var cityName;
@@ -119,9 +120,63 @@ function getFiveDay(data){
     var day2Humidity = document.createElement('p');
     day2Humidity.textContent = 'humidity:'+' ' + data.daily[0].humidity;
     dayTwoEl.append(day2Humidity)
-    console.log(data.daily[0])
-  
    
+    // day three
+  
+    var day3Date = document.createElement('p');
+    day3Date.textContent = moment.unix(data.daily[1].dt).format('MM/DD/YYYY')
+    dayThreeEl.append(day3Date);
+
+    var day3 = document.createElement('p');
+    day3.textContent = 'temp:'+' '+ data.daily[1].temp.day;
+    dayThreeEl.append(day3);
+    
+    var day3Humidity = document.createElement('p');
+    day3Humidity.textContent = 'humidity:'+' ' + data.daily[1].humidity;
+    dayThreeEl.append(day3Humidity)
+
+    // day four
+    var day4Date = document.createElement('p');
+    day4Date.textContent = moment.unix(data.daily[2].dt).format('MM/DD/YYYY')
+    dayFourEl.append(day4Date);
+
+    var day4 = document.createElement('p');
+    day4.textContent = 'temp:'+' '+ data.daily[2].temp.day;
+    dayFourEl.append(day4);
+    
+    var day4Humidity = document.createElement('p');
+    day4Humidity.textContent = 'humidity:'+' ' + data.daily[2].humidity;
+    dayFourEl.append(day4Humidity)
+
+    // day five
+
+    var day5Date = document.createElement('p');
+    day5Date.textContent = moment.unix(data.daily[3].dt).format('MM/DD/YYYY')
+    dayFiveEl.append(day5Date);
+
+    var day5 = document.createElement('p');
+    day5.textContent = 'temp:'+' '+ data.daily[3].temp.day;
+    dayFiveEl.append(day5);
+    
+    var day5Humidity = document.createElement('p');
+    day5Humidity.textContent = 'humidity:'+' ' + data.daily[3].humidity;
+    dayFiveEl.append(day5Humidity)
+
+    // day six
+
+    var day6Date = document.createElement('p');
+    day6Date.textContent = moment.unix(data.daily[4].dt).format('MM/DD/YYYY')
+    daySixEl.append(day6Date);
+
+    var day6 = document.createElement('p');
+    day6.textContent = 'temp:'+' '+ data.daily[4].temp.day;
+    daySixEl.append(day6);
+    
+    var day6Humidity = document.createElement('p');
+    day6Humidity.textContent = 'humidity:'+' ' + data.daily[4].humidity;
+    daySixEl.append(day6Humidity)
+
+
 };
 
 function saveSearch(city){
