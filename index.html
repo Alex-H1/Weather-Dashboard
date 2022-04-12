@@ -16,18 +16,24 @@
         </div>
     </section>
 
-    <nav class="navbar navbar-light bg-light">
-        <form id="getCity" class="form-inline">
-          <input class="form-control mr-sm-2" id="search" type="search" placeholder="Search" aria-label="Search">
-          <button id="btn" class="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>
-        </form>
-    </nav>
+    <section class="container-fluid">
+        <div class="row">
+            <nav class="navbar navbar-light bg-light col-sm-6">
+                <form id="getCity" class="form-inline">
+                <input class="form-control mr-sm-2" id="search" type="search" placeholder="Search" aria-label="Search">
+                <button id="btn" class="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>
+                </form>
+            </nav>
 
-    <div class="container-fluid">
-        <div class="col-6">
-            
+            <article class="col-sm-6  text-center">
+                <div id="dailyWeather"></div>
+                <div id="localTemp"></div>
+                <div id="humidity"></div>
+            </article>
         </div>
-    </div>
+    </section>
+    
+
 
 
 

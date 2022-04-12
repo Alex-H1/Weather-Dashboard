@@ -8,68 +8,74 @@
 var searchEl = $('#search');
 var citySubmit = $('#getCity');
 var btnEl=$('#btn');
-
-
-
-// var weather = 'https://api.openweathermap.org/data/2.5/onecall?lat=35.2827525&lon=-120.6596156&unitsimperial&exclude=hourly,daily&appid=774227cba4191819abc929f4c68a7098';{
-//     var units='imperial';
-// }
-// fetch(weather)
-// .then(response =>{
-//     return response.json();
-// })
-// .then(data=>{
-   
-// })
-
-// var cityCordinates = 'http://api.openweathermap.org/geo/1.0/direct?q=San Luis Obispo=&limit=5&appid=774227cba4191819abc929f4c68a7098'
-// fetch(cityCordinates)
-// .then(location =>{
-//     return location.json();
-// })
-// .then(city =>{
-// })
-
-// function getCity(){
-//     var cityName = searchEl.val
-// }
-
-
-
-
-
+var titleEl = $('#dailyWeather');
+var localTempEl = $('#localTemp');
+var humidityEL = $('#humidity');
+var cityName;
+var humidity;
+var windSpeed;
+var temp;
 
 function getLocation(event){
     event.preventDefault();    
     city = $('#search').val().trim();
+    saveSearch();
     if(city){
         // put city in api endpoint
         getWeather(city);
-        // append content
-
-        // repoContainerEl.textContent = '';
-        // nameInputEl.value = '';
+       
     }else{
-        console.log('no city')
+        console.log('no city');
     }
+
+
 };
 
 function getWeather(city){
 
-    // var weather = 'https://api.openweathermap.org/data/2.5/weather?q=' + city + '&units=imperial&appid=774227cba4191819abc929f4c68a7098';
-    var weather ='http://api.openweathermap.org/geo/1.0/direct?q=' +  city + '&limit=5&appid=774227cba4191819abc929f4c68a7098'
+    var weather = 'https://api.openweathermap.org/data/2.5/weather?q=' + city + '&units=imperial&appid=774227cba4191819abc929f4c68a7098';
     fetch(weather)
 
     .then(response =>{
         if(response.ok){
             response.json().then(data =>{
-                console.log(data);
-                // display weather
+                weatherData = data;
+                temp = weatherData.main.temp;
+                humidity = weatherData.main.humidity;
+                windSpeed = weatherData.wind.speed;
+                cityName = weatherData.name;
+               
+                cityDisplay(data);
+
             });
+
         }
     })
-    .catch(error =>{
-        console.log(error)
-    })
 }
+
+
+
+function cityDisplay(data){
+    // displays city name
+    var cityTitle = document.createElement('h1');
+    cityTitle.textContent = cityName;
+
+    titleEl.append(cityTitle);
+    // displays local temp
+    var displayTemp = document.createElement('p');
+    displayTemp.textContent = 'temperature  ' + temp;
+
+    localTempEl.append(displayTemp);
+    // display local humidity
+    var localHumidity = document.createElement('p');
+    localHumidity.textContent = 'humidity  ' + humidity;
+    console.log(humidity)
+
+
+
+};
+function saveSearch(){
+    localStorage.setItem('city',city);
+};
+
 $('#btn').on('click',getLocation);
