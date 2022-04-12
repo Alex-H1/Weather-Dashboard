@@ -13,6 +13,10 @@ var localTempEl = $('#localTemp');
 var humidityEL = $('#humidity');
 var windSpeedEl = $('#windSpeed');
 var uviEl = $('#uvi');
+var dayTwoEl = $('.dayTwo');
+var dayThreeEl =$('.dayThree');
+var dayFourEl =$('.dayFive');
+var daySixEl =$('.daySix');
 var searchLog = [];
 var cityName;
 var humidity;
@@ -23,6 +27,7 @@ function getLocation(event){
     event.preventDefault();    
     city = $('#search').val().trim();
     saveSearch(city);
+    // searchPush(storedSearch);
     if(city){
         // put city in api endpoint
         getWeather(city);
@@ -35,13 +40,15 @@ function getLocation(event){
 };
 
 function getUviforecast(lat,lon){
-    var url = 'https://api.openweathermap.org/data/2.5/onecall?lat=' + lat + '&lon='+ lon + '&exclude=hourly,minutely,alert&appid=774227cba4191819abc929f4c68a7098';
+    var url = 'https://api.openweathermap.org/data/2.5/onecall?lat=' + lat + '&lon='+ lon + '&exclude=hourly,minutely,alert&units=imperial&appid=774227cba4191819abc929f4c68a7098';
     fetch(url).then(response=>{
         if(response.ok){
             response.json().then(data=>{
-               
                 var uviEl = document.getElementById('uvi');
                 uviEl.textContent = 'uvi  ' + data.current.uvi; 
+
+
+                getFiveDay(data);
             })
         }
     })
@@ -56,7 +63,6 @@ function getWeather(city){
         if(response.ok){
             response.json().then(data =>{
                 weatherData = data;
-                console.log(weatherData);
                 temp = weatherData.main.temp;
                 humidity = weatherData.main.humidity;
                 windSpeed = weatherData.wind.speed;
@@ -70,8 +76,6 @@ function getWeather(city){
         }
     })
 }
-
-
 
 function cityDisplay(weatherData){
     var unixTime = moment.unix(weatherData.dt).format('MM/DD/YYYY');
@@ -100,13 +104,39 @@ function cityDisplay(weatherData){
     localWind.textContent = 'Wind Speed  ' + windSpeed;
 
     windSpeedEl.append(localWind);
-
-
-
 };
+
+function getFiveDay(data){
+    // day 2 date 
+    var day2Date = document.createElement('p');
+    day2Date.textContent = moment.unix(data.daily[0].dt).format('MM/DD/YYYY')
+    dayTwoEl.append(day2Date);
+    // day 2 temp
+    var day2 = document.createElement('p');
+    day2.textContent = 'temp:'+' '+ data.daily[0].temp.day;
+    dayTwoEl.append(day2);
+    // day 2 humidity
+    var day2Humidity = document.createElement('p');
+    day2Humidity.textContent = 'humidity:'+' ' + data.daily[0].humidity;
+    dayTwoEl.append(day2Humidity)
+    console.log(data.daily[0])
+  
+   
+};
+
 function saveSearch(city){
     searchLog.push(city);
-    localStorage.setItem('searchLog',searchLog);
+   localStorage.setItem("searchlog", JSON.stringify(searchLog));
+   var storedSearch = JSON.parse(localStorage.getItem(searchLog));
+   searchPush(storedSearch);
 };
+
+function searchPush(storedSearch){
+    for(var i=0 ; i<searchLog.length[i]; i++){
+        var searchButton = document.createElement('button');
+        searchButton.textContent = storedSearch;
+        console.log(storedSearch);
+    };
+}
 
 $('#btn').on('click',getLocation);
