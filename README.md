@@ -15,3 +15,5 @@ click [here](https://alex-h1.github.io/Weather-Dashboard/) to view deployed webs
 wire frame
 
 ![alt text](/assets/Screenshot%202022-04-11%20121321.jpg)
+
+![alt text](/assets/Screenshot%202022-04-12%20162149.jpg)

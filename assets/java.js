@@ -208,19 +208,13 @@ function getFiveDay(data){
 
 };
 
+
 function saveSearch(city){
     searchLog.push(city);
    localStorage.setItem("searchlog", JSON.stringify(searchLog));
    var storedSearch = JSON.parse(localStorage.getItem(searchLog));
-   searchPush(storedSearch);
+   console.log(searchLog)
 };
 
-function searchPush(storedSearch){
-    for(var i=0 ; i<searchLog.length[i]; i++){
-        var searchButton = document.createElement('button');
-        searchButton.textContent = storedSearch;
-        console.log(storedSearch);
-    };
-}
 
 $('#btn').on('click',getLocation);
