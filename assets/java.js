@@ -84,25 +84,28 @@ function cityDisplay(weatherData){
     // displays city name
     var cityTitle = document.createElement('h1');
     cityTitle.textContent = cityName +' '+ unixTime;
-
+    // weather icon
+    var iconCode = weatherData.weather[0].icon;
+    var iconUrl ='http://openweathermap.org/img/w/' + iconCode + '.png';
+    $('#weatherIcon').attr('src', iconUrl);
 
     titleEl.append(cityTitle);
 
     // displays local temp
     var displayTemp = document.createElement('p');
-    displayTemp.textContent = 'temperature  ' + temp;
+    displayTemp.textContent = 'temperature  ' + temp +' ' +'℉';
 
     localTempEl.append(displayTemp);
 
     // display local humidity
     var localHumidity = document.createElement('p');
-    localHumidity.textContent = 'humidity  ' + humidity;
+    localHumidity.textContent = 'humidity  ' + humidity + ' '+ '%';
     
     humidityEL.append(localHumidity);
 
     // display wind speed
     var localWind = document.createElement('p');
-    localWind.textContent = 'Wind Speed  ' + windSpeed;
+    localWind.textContent = 'Wind Speed  ' + windSpeed +' ' +'MPH';
 
     windSpeedEl.append(localWind);
 };
@@ -110,15 +113,21 @@ function cityDisplay(weatherData){
 function getFiveDay(data){
     // day 2 date 
     var day2Date = document.createElement('p');
-    day2Date.textContent = moment.unix(data.daily[0].dt).format('MM/DD/YYYY')
+    day2Date.textContent = moment.unix(data.daily[1].dt).format('MM/DD/YYYY');
     dayTwoEl.append(day2Date);
+    // weather icon
+    var iconTwo = data.daily[1].weather[0].icon;
+    var iconTwoUrl ='http://openweathermap.org/img/w/' + iconTwo + '.png';
+
+    $('#dayTwoIcon').attr('src', iconTwoUrl);
+
     // day 2 temp
     var day2 = document.createElement('p');
-    day2.textContent = 'temp:'+' '+ data.daily[0].temp.day;
+    day2.textContent = 'temp:'+' '+ data.daily[1].temp.day+' ' +'℉';
     dayTwoEl.append(day2);
     // day 2 humidity
     var day2Humidity = document.createElement('p');
-    day2Humidity.textContent = 'humidity:'+' ' + data.daily[0].humidity;
+    day2Humidity.textContent = 'humidity:'+' ' + data.daily[1].humidity + ' '+ '%';
     dayTwoEl.append(day2Humidity)
    
     // day three
@@ -127,12 +136,17 @@ function getFiveDay(data){
     day3Date.textContent = moment.unix(data.daily[1].dt).format('MM/DD/YYYY')
     dayThreeEl.append(day3Date);
 
+    var iconThree = data.daily[2].weather[0].icon;
+    var iconThreeUrl ='http://openweathermap.org/img/w/' + iconThree + '.png';
+
+    $('#dayThreeIcon').attr('src', iconThreeUrl);
+
     var day3 = document.createElement('p');
-    day3.textContent = 'temp:'+' '+ data.daily[1].temp.day;
+    day3.textContent = 'temp:'+' '+ data.daily[1].temp.day+' ' +'℉';
     dayThreeEl.append(day3);
     
     var day3Humidity = document.createElement('p');
-    day3Humidity.textContent = 'humidity:'+' ' + data.daily[1].humidity;
+    day3Humidity.textContent = 'humidity:'+' ' + data.daily[1].humidity + ' '+ '%';
     dayThreeEl.append(day3Humidity)
 
     // day four
@@ -140,12 +154,17 @@ function getFiveDay(data){
     day4Date.textContent = moment.unix(data.daily[2].dt).format('MM/DD/YYYY')
     dayFourEl.append(day4Date);
 
+    var iconFour = data.daily[3].weather[0].icon;
+    var iconFourUrl ='http://openweathermap.org/img/w/' + iconFour + '.png';
+
+    $('#dayFourIcon').attr('src', iconFourUrl);
+
     var day4 = document.createElement('p');
-    day4.textContent = 'temp:'+' '+ data.daily[2].temp.day;
+    day4.textContent = 'temp:'+' '+ data.daily[2].temp.day+' ' +'℉';
     dayFourEl.append(day4);
     
     var day4Humidity = document.createElement('p');
-    day4Humidity.textContent = 'humidity:'+' ' + data.daily[2].humidity;
+    day4Humidity.textContent = 'humidity:'+' ' + data.daily[2].humidity + ' '+ '%';
     dayFourEl.append(day4Humidity)
 
     // day five
@@ -154,12 +173,17 @@ function getFiveDay(data){
     day5Date.textContent = moment.unix(data.daily[3].dt).format('MM/DD/YYYY')
     dayFiveEl.append(day5Date);
 
+    var iconFive = data.daily[4].weather[0].icon;
+    var iconFiveUrl ='http://openweathermap.org/img/w/' + iconFive + '.png';
+
+    $('#dayFiveIcon').attr('src', iconFiveUrl);
+
     var day5 = document.createElement('p');
-    day5.textContent = 'temp:'+' '+ data.daily[3].temp.day;
+    day5.textContent = 'temp:'+' '+ data.daily[3].temp.day+' ' +'℉';
     dayFiveEl.append(day5);
     
     var day5Humidity = document.createElement('p');
-    day5Humidity.textContent = 'humidity:'+' ' + data.daily[3].humidity;
+    day5Humidity.textContent = 'humidity:'+' ' + data.daily[3].humidity + ' '+ '%';
     dayFiveEl.append(day5Humidity)
 
     // day six
@@ -168,12 +192,17 @@ function getFiveDay(data){
     day6Date.textContent = moment.unix(data.daily[4].dt).format('MM/DD/YYYY')
     daySixEl.append(day6Date);
 
+    var iconSix = data.daily[4].weather[0].icon;
+    var iconSixUrl ='http://openweathermap.org/img/w/' + iconSix + '.png';
+
+    $('#daySixIcon').attr('src', iconSixUrl);
+
     var day6 = document.createElement('p');
-    day6.textContent = 'temp:'+' '+ data.daily[4].temp.day;
+    day6.textContent = 'temp:'+' '+ data.daily[4].temp.day+' ' +'℉';
     daySixEl.append(day6);
     
     var day6Humidity = document.createElement('p');
-    day6Humidity.textContent = 'humidity:'+' ' + data.daily[4].humidity;
+    day6Humidity.textContent = 'humidity:'+' ' + data.daily[4].humidity + ' '+ '%';
     daySixEl.append(day6Humidity)
 
 
