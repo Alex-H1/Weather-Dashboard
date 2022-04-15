@@ -24,10 +24,38 @@ var humidity;
 var windSpeed;
 var temp;
 
+// console.log(localStorage.getItem("searchlog"))
+
+
+if(localStorage.getItem("searchlog") === null){
+    searchLog =[]
+}else{
+    searchLog = JSON.parse(localStorage.getItem("searchlog"))
+    // iterate through array for loop then call display search
+    for(var i=0 ; i< searchLog.length; i++){
+        displaySearch();
+    }
+}
+
+function displaySearch(city){
+    var showSearch = $("#showsearch");
+    var createElement = $("<button>");
+    createElement.html(city);
+    createElement.on("click",function(event){
+        event.preventDefault();
+        console.log(event.target.innerHTML)
+        getWeather(event.target.innerHTML);
+
+    })
+    showSearch.append(createElement);
+};
+
 function getLocation(event){
     event.preventDefault();    
     city = $('#search').val().trim();
     saveSearch(city);
+    displaySearch(city);
+
     // searchPush(storedSearch);
     if(city){
         // put city in api endpoint
@@ -36,8 +64,6 @@ function getLocation(event){
     }else{
         console.log('no city');
     }
-
-
 };
 
 function getUviforecast(lat,lon){
@@ -81,6 +107,7 @@ function getWeather(city){
 function cityDisplay(weatherData){
     var unixTime = moment.unix(weatherData.dt).format('MM/DD/YYYY');
 
+    titleEl.html("")
     // displays city name
     var cityTitle = document.createElement('h1');
     cityTitle.textContent = cityName +' '+ unixTime;
@@ -91,18 +118,21 @@ function cityDisplay(weatherData){
 
     titleEl.append(cityTitle);
 
+    localTempEl.html("")
     // displays local temp
     var displayTemp = document.createElement('p');
     displayTemp.textContent = 'temperature  ' + temp +' ' +'℉';
 
     localTempEl.append(displayTemp);
 
+    humidityEL.html("")
     // display local humidity
     var localHumidity = document.createElement('p');
     localHumidity.textContent = 'humidity  ' + humidity + ' '+ '%';
     
     humidityEL.append(localHumidity);
 
+    windSpeedEl.html("")
     // display wind speed
     var localWind = document.createElement('p');
     localWind.textContent = 'Wind Speed  ' + windSpeed +' ' +'MPH';
@@ -112,6 +142,8 @@ function cityDisplay(weatherData){
 
 function getFiveDay(data){
     // day 2 date 
+
+    dayTwoEl.html("")
     var day2Date = document.createElement('p');
     day2Date.textContent = moment.unix(data.daily[1].dt).format('MM/DD/YYYY');
     dayTwoEl.append(day2Date);
@@ -131,7 +163,7 @@ function getFiveDay(data){
     dayTwoEl.append(day2Humidity)
    
     // day three
-  
+    dayThreeEl.html("")
     var day3Date = document.createElement('p');
     day3Date.textContent = moment.unix(data.daily[1].dt).format('MM/DD/YYYY')
     dayThreeEl.append(day3Date);
@@ -150,6 +182,7 @@ function getFiveDay(data){
     dayThreeEl.append(day3Humidity)
 
     // day four
+    dayFourEl.html("")
     var day4Date = document.createElement('p');
     day4Date.textContent = moment.unix(data.daily[2].dt).format('MM/DD/YYYY')
     dayFourEl.append(day4Date);
@@ -168,7 +201,7 @@ function getFiveDay(data){
     dayFourEl.append(day4Humidity)
 
     // day five
-
+    dayFiveEl.html("")
     var day5Date = document.createElement('p');
     day5Date.textContent = moment.unix(data.daily[3].dt).format('MM/DD/YYYY')
     dayFiveEl.append(day5Date);
@@ -188,6 +221,7 @@ function getFiveDay(data){
 
     // day six
 
+    daySixEl("")
     var day6Date = document.createElement('p');
     day6Date.textContent = moment.unix(data.daily[4].dt).format('MM/DD/YYYY')
     daySixEl.append(day6Date);
@@ -212,8 +246,8 @@ function getFiveDay(data){
 function saveSearch(city){
     searchLog.push(city);
    localStorage.setItem("searchlog", JSON.stringify(searchLog));
-   var storedSearch = JSON.parse(localStorage.getItem(searchLog));
-   console.log(searchLog)
+//    var storedSearch = JSON.parse(localStorage.getItem(searchLog));
+//    console.log(searchLog)
 };
 
 
