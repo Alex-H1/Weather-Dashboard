@@ -143,7 +143,6 @@ function cityDisplay(weatherData){
 function getFiveDay(data){
     // day 2 date 
 
-    dayTwoEl.html("")
     var day2Date = document.createElement('p');
     day2Date.textContent = moment.unix(data.daily[1].dt).format('MM/DD/YYYY');
     dayTwoEl.append(day2Date);
@@ -163,7 +162,6 @@ function getFiveDay(data){
     dayTwoEl.append(day2Humidity)
    
     // day three
-    dayThreeEl.html("")
     var day3Date = document.createElement('p');
     day3Date.textContent = moment.unix(data.daily[1].dt).format('MM/DD/YYYY')
     dayThreeEl.append(day3Date);
@@ -182,7 +180,6 @@ function getFiveDay(data){
     dayThreeEl.append(day3Humidity)
 
     // day four
-    dayFourEl.html("")
     var day4Date = document.createElement('p');
     day4Date.textContent = moment.unix(data.daily[2].dt).format('MM/DD/YYYY')
     dayFourEl.append(day4Date);
@@ -201,7 +198,6 @@ function getFiveDay(data){
     dayFourEl.append(day4Humidity)
 
     // day five
-    dayFiveEl.html("")
     var day5Date = document.createElement('p');
     day5Date.textContent = moment.unix(data.daily[3].dt).format('MM/DD/YYYY')
     dayFiveEl.append(day5Date);
@@ -221,7 +217,6 @@ function getFiveDay(data){
 
     // day six
 
-    daySixEl("")
     var day6Date = document.createElement('p');
     day6Date.textContent = moment.unix(data.daily[4].dt).format('MM/DD/YYYY')
     daySixEl.append(day6Date);
